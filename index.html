@@ -3,17 +3,82 @@
 <head>
   <meta charset="utf-8">
   <title>pixel-wants-color: mapping Descartes to the retina</title>
+  <link rel="stylesheet" href="main.css" />
+  <script type="text/javascript" src="basic/code.js"></script>
+  <script type="text/javascript" src="setup.js"></script>
 </head>
 <body>
-<header>
-  <h1></h1>
-</header>
-<section id="examples">
-  <h2>Examples</h2>
-  <ul>
-    <li><a href="pixels/gradient.html">gradient</a></li>
-    <li><a href="pixels/waves.html">waves</a></li>
-  </ul>
-</section>
+  <header>
+    <h1>Pixel wants color</h1>
+  </header>
+  <section id="inroduction">
+    <p>
+      On the input you get cartesian coordinates of your screen and the moment in time expressed as
+      a number. You can decide which color should go out:
+    </p>
+    <pre>
+function getColor(x, y, now, context) {
+  var red   = x % 256;
+  var green = y % 256;
+  var blue  = (now / 5) % 256;
+  var alpha = 255;
+  return [red, green, blue, alpha]
+}</pre>
+    <p>
+      Will generate:
+    </p>
+    <canvas id="screen"></canvas>
+  </section>
+  <section id="examples">
+    <h2>Examples</h2>
+    <ul>
+      <li><a href="basic/index.html" class="example-link">basic</a>
+        <a href="https://github.com/morisil/pixel-wants-color/blob/master/basic/code.js">(source)</a>
+      </li>
+      <li><a href="gradient/index.html" class="example-link">gradient</a>
+        <a href="https://github.com/morisil/pixel-wants-color/blob/master/gradient/code.js">(source)</a>
+      </li>
+      <li><a href="bars/index.html" class="example-link">bars</a>
+        <a href="https://github.com/morisil/pixel-wants-color/blob/master/bars/code.js">(source)</a>
+      </li>
+      <li><a href="waves/index.html" class="example-link">waves</a>
+        <a href="https://github.com/morisil/pixel-wants-color/blob/master/waves/code.js">(source)</a>
+      </li>
+    </ul>
+    <p>
+      Hint: make the window smaller to improve the performance.
+    </p>
+  </section>
+  <section>
+    <h2>Add your own!</h2>
+    <ul>
+      <li><a href="https://github.com/morisil/pixel-wants-color">Fork project on GitHub</a></li>
+      <li>Copy /basic under your own name</li>
+      <li>Change title inside your index.html</li>
+      <li>Add your project to examples</li>
+      <li>Play with your code.js</li>
+      <li>Create pull request</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Why?</h2>
+    <p>
+      I wanted to make coding such visuals as easy as possible, without any programming environment,
+      directly in your browser.
+    </p>
+    <p>
+      While writing this documentation I also realized that I want to pay a tribute to the pixel
+      graphics on 8-bit computers,
+      especially <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a>, which was
+      my first machine. Not only mine, for the whole generation it was like an entry into another
+      dimension, letting us start programming straight away from this friendly blue screen.
+    </p>
+    <p>
+      I believe that the ability to code should be accessible for everyone. And it should be fun
+      as well. It helps
+      when we are making the connection between what we type as a code and what we see on
+      the screen as an effect. I hope this project will help.
+    </p>
+  </section>
 </body>
 </html>
