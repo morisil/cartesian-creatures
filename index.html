@@ -13,8 +13,8 @@
   </header>
   <section id="inroduction">
     <p>
-      On the input you get cartesian coordinates of your screen and the moment in time expressed as
-      a number. You can decide which color should go out:
+      On the input you get coordinates of a point on your screen and current moment in
+      time expressed as a number. You can decide which color should go out:
     </p>
     <pre>
 function getColor(x, y, now, context) {
@@ -22,7 +22,7 @@ function getColor(x, y, now, context) {
   var green = y % 256;
   var blue  = (now / 5) % 256;
   var alpha = 255;
-  return [red, green, blue, alpha]
+  return [red, green, blue, alpha];
 }</pre>
     <p>
       Will generate:
@@ -43,6 +43,9 @@ function getColor(x, y, now, context) {
       </li>
       <li><a href="waves/index.html" class="example-link">waves</a>
         <a href="https://github.com/morisil/pixel-wants-color/blob/master/waves/code.js">(source)</a>
+      </li>
+      <li><a href="organic-tension/index.html" class="example-link">organic tension</a>
+        <a href="https://github.com/morisil/pixel-wants-color/blob/master/organic-tension/code.js">(source)</a>
       </li>
     </ul>
     <p>
@@ -79,6 +82,36 @@ function getColor(x, y, now, context) {
       when we are making the connection between what we type as a code and what we see on
       the screen as an effect. I hope this project will help.
     </p>
+  </section>
+  <section>
+    <h2>The context</h2>
+    <p>
+      Some effects require additional information. For example you might need some specific values
+      computed before each frame. This information can be put in the context after defining
+      setUpContext and updateContext methods.
+    </p>
+    <pre>
+// called when animation is loaded
+function setUpContext(context) {
+  // ... do your things, e.g.:
+  context.frameNumber = 0;
+  return context;
+}</pre>
+    <pre>
+// called before each animation frame
+function updateContext(context) {
+  // ... do your things, e.g.:
+  context.frameNumber++;
+  return context;
+}</pre>
+    <p>
+      The context is just a dictionary you can extend. It comes with some values by default:
+    </p>
+    <ul>
+      <li>imageData - what's on screen now</li>
+      <li>width - canvas width</li>
+      <li>height - canvas height</li>
+    </ul>
   </section>
 </body>
 </html>
