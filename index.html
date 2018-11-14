@@ -3,115 +3,137 @@
 <head>
   <meta charset="utf-8">
   <title>pixel-wants-color: mapping Descartes to the retina</title>
-  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="main.css"/>
   <script type="text/javascript" src="basic/code.js"></script>
   <script type="text/javascript" src="setup.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Pixel wants color</h1>
-  </header>
-  <section id="inroduction">
-    <p>
-      On the input you get coordinates of a point on your screen and current moment in
-      time expressed as a number. You can decide which color should go out:
-    </p>
-    <pre>
+<header>
+  <h1>Pixel wants color</h1>
+</header>
+<section id="inroduction">
+  <p>
+    On the input you get coordinates of a pixel on your screen and current moment in
+    time expressed as a number. You can decide which color should go out. For example:
+  </p>
+  <pre>
 function getColor(x, y, now, context) {
   var red   = x % 256;
   var green = y % 256;
   var blue  = (now / 5) % 256;
-  var alpha = 255;
-  return [red, green, blue, alpha];
+  return [red, green, blue];
 }</pre>
-    <p>
-      Will generate:
-    </p>
-    <canvas id="screen"></canvas>
-  </section>
-  <section id="examples">
-    <h2>Examples</h2>
-    <ul>
-      <li><a href="basic/index.html" class="example-link">basic</a>
-        <a href="https://github.com/morisil/pixel-wants-color/blob/master/basic/code.js">(source)</a>
-      </li>
-      <li><a href="gradient/index.html" class="example-link">gradient</a>
-        <a href="https://github.com/morisil/pixel-wants-color/blob/master/gradient/code.js">(source)</a>
-      </li>
-      <li><a href="bars/index.html" class="example-link">bars</a>
-        <a href="https://github.com/morisil/pixel-wants-color/blob/master/bars/code.js">(source)</a>
-      </li>
-      <li><a href="waves/index.html" class="example-link">waves</a>
-        <a href="https://github.com/morisil/pixel-wants-color/blob/master/waves/code.js">(source)</a>
-      </li>
-      <li><a href="organic-tension/index.html" class="example-link">organic tension</a>
-        <a href="https://github.com/morisil/pixel-wants-color/blob/master/organic-tension/code.js">(source)</a>
-      </li>
-    </ul>
-    <p>
-      Hint: make the window smaller to improve the performance.
-    </p>
-  </section>
-  <section>
-    <h2>Add your own!</h2>
-    <ul>
-      <li><a href="https://github.com/morisil/pixel-wants-color">Fork project on GitHub</a></li>
-      <li>Copy /basic under your own name</li>
-      <li>Change title inside your index.html</li>
-      <li>Add your project to examples</li>
-      <li>Play with your code.js</li>
-      <li>Create pull request</li>
-    </ul>
-  </section>
-  <section>
-    <h2>Why?</h2>
-    <p>
-      I wanted to make coding such visuals as easy as possible, without any programming environment,
-      directly in your browser.
-    </p>
-    <p>
-      While writing this documentation I also realized that I want to pay a tribute to the pixel
-      graphics on 8-bit computers,
-      especially <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a>, which was
-      my first machine. Not only mine, for the whole generation it was like an entry into another
-      dimension, letting us start programming straight away from this friendly blue screen.
-    </p>
-    <p>
-      I believe that the ability to code should be accessible for everyone. And it should be fun
-      as well. It helps
-      when we are making the connection between what we type as a code and what we see on
-      the screen as an effect. I hope this project will help.
-    </p>
-  </section>
-  <section>
-    <h2>The context</h2>
-    <p>
-      Some effects require additional information. For example you might need some specific values
-      computed before each frame. This information can be put in the context after defining
-      setUpContext and updateContext methods.
-    </p>
-    <pre>
+  <p>
+    Will generate:
+  </p>
+  <canvas id="screen"></canvas>
+  <p>
+    The color is based on the <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>
+    model.
+  </p>
+  <p>
+    The <code>%</code> stands for <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo
+    operation</a>.
+    It represents a reminder after dividing a number by 256. It will guarantee that computed value
+    is always within 0-255 range, because 255 is the maximum value we can assign to either red,
+    green,
+    or blue. The value <code>[0, 0, 0]</code> stands for black while <code>[255, 255, 255]</code>
+    stands for white. The value <code>[255, 0, 0]</code> stands for "pure redness".
+  </p>
+  <p>
+    The <code>now</code> has to be divided by <code>5</code>, otherwise animation would be too fast.
+    You should adjust this factor according to your perceptual needs.
+  </p>
+  <p>
+    For now you don't have to care so much for the <a href="#context">context</a>.
+  </p>
+</section>
+<section id="examples">
+  <h2>Examples</h2>
+  <ul>
+    <li><a href="basic/index.html" class="example-link">basic</a>
+      <a href="https://github.com/morisil/pixel-wants-color/blob/master/basic/code.js">(source)</a>
+    </li>
+    <li><a href="gradient/index.html" class="example-link">gradient</a>
+      <a href="https://github.com/morisil/pixel-wants-color/blob/master/gradient/code.js">(source)</a>
+    </li>
+    <li><a href="bars/index.html" class="example-link">bars</a>
+      <a href="https://github.com/morisil/pixel-wants-color/blob/master/bars/code.js">(source)</a>
+    </li>
+    <li><a href="waves/index.html" class="example-link">waves</a>
+      <a href="https://github.com/morisil/pixel-wants-color/blob/master/waves/code.js">(source)</a>
+    </li>
+    <li><a href="organic-tension/index.html" class="example-link">organic tension</a>
+      <a href="https://github.com/morisil/pixel-wants-color/blob/master/organic-tension/code.js">(source)</a>
+    </li>
+  </ul>
+  <p>
+    Hint: make the window smaller to improve the performance. Or you can go full screen and
+    zoom-in (CTRL-+). It will also make the animation smoother and sometimes more interesting.
+  </p>
+</section>
+<section id="add-your-own">
+  <h2>Add your own!</h2>
+  <ul>
+    <li><a href="https://github.com/morisil/pixel-wants-color">Fork this project on GitHub</a></li>
+    <li>Copy <code>/basic</code> under your own name</li>
+    <li>Add your project to <a href="#examples">examples</a></li>
+    <li><code>index.html</code> - put your title</li>
+    <li><code>code.js</code> - play around</li>
+    <li>Create <a href="https://help.github.com/articles/about-pull-requests/">pull request</a></li>
+  </ul>
+</section>
+<section id="why">
+  <h2>Why?</h2>
+  <p>
+    I wanted to make coding such visuals as easy as possible, without any programming environment,
+    directly in your browser.
+  </p>
+  <p>
+    While writing this documentation I also realized that I want to pay a tribute to the pixel
+    graphics on 8-bit computers,
+    especially <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a>, which was
+    my first machine. Not only mine, for the whole generation it was like an entry into another
+    dimension, letting us start programming straight away from this friendly blue screen.
+  </p>
+  <p>
+    I believe that the ability to code should be accessible for everyone. And it should be fun
+    as well. It helps
+    when we are making the connection between what we type as a code and what we see on
+    the screen as an effect. I hope this project will help.
+  </p>
+</section>
+<section id="context">
+  <h2>The context</h2>
+  <p>
+    Achieving more complex visual effects might require additional information over
+    <code>x</code>, <code>y</code> and <code>now</code>. For example your pixels might ask for
+    some values computed before each animation frame. This information can be put in the
+    <code>context</code>. All you need is to define <code>setUpContext</code> and
+    <code>updateContext</code> functions in your <code>code.js</code>.
+  </p>
+  <pre>
 // called when animation is loaded
 function setUpContext(context) {
   // ... do your things, e.g.:
   context.frameNumber = 0;
   return context;
 }</pre>
-    <pre>
+  <pre>
 // called before each animation frame
 function updateContext(context) {
   // ... do your things, e.g.:
   context.frameNumber++;
   return context;
 }</pre>
-    <p>
-      The context is just a dictionary you can extend. It comes with some values by default:
-    </p>
-    <ul>
-      <li>imageData - what's on screen now</li>
-      <li>width - canvas width</li>
-      <li>height - canvas height</li>
-    </ul>
-  </section>
+  <p>
+    The context is just a dictionary you can extend. It comes with some values by default:
+  </p>
+  <ul>
+    <li><code>imageData</code> - what's on the screen now</li>
+    <li><code>width</code> - canvas width</li>
+    <li><code>height</code> - canvas height</li>
+  </ul>
+</section>
 </body>
 </html>

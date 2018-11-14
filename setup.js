@@ -1,4 +1,3 @@
-
 window.onload = function() {
   var screen = document.getElementById("screen");
   var width = screen.offsetWidth;
@@ -32,21 +31,23 @@ window.onload = function() {
         imageData.data[pixelIndex] = color[0];       // Red
         imageData.data[pixelIndex + 1] = color[1];   // Green
         imageData.data[pixelIndex + 2] = color[2];   // Blue
-        imageData.data[pixelIndex + 3] = color[3];   // Alpha
+        imageData.data[pixelIndex + 3] = 255;        // Alpha
       }
     }
 
   }
 
   function paint(now) {
-      createImage(now);
-      screenContext.putImageData(imageData, 0, 0);
-      window.requestAnimationFrame(paint);
+    createImage(now);
+    screenContext.putImageData(imageData, 0, 0);
+    window.requestAnimationFrame(paint);
   }
 
   window.requestAnimationFrame(paint);
 };
 
+// it's a hack, when onresize was the same as onload it was causing significant slowdown after
+// each window resize, like if some resources were leaking
 window.onresize = function() {
   location.reload();
 }

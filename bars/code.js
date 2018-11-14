@@ -20,5 +20,5 @@ function getColor(x, y, now, context) {
     /
     2
   ) * 255;
-  return [red, green, blue, 255];
+  return [red, green, blue];
 }

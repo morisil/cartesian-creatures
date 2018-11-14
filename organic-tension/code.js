@@ -84,5 +84,5 @@ function getColor(x, y, now, context) {
   var red = 255 - ((Math.sin(pointDistance(x, y, context.points) * 0.600) + 1) * 255);
   var green = 255 - ((Math.sin(pointDistance(x, y, context.points) * 0.602) + 1) * 255);
   var blue = 255 - ((Math.sin(pointDistance(x, y, context.points) * 0.601) + 1) * 255);
-  return [red, green, blue, 255];
+  return [red, green, blue];
 }

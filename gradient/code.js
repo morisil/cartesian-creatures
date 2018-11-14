@@ -4,5 +4,5 @@ function getColor(x, y, now, context) {
   var red = (Math.floor(weightX) + (now / 10)) % 256;
   var green = Math.floor(weightY);
   var blue = 0;
-  return [red, green, blue, 255];
+  return [red, green, blue];
 }
