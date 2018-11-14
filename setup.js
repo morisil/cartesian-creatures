@@ -1,5 +1,4 @@
 window.onload = function() {
-  maybeJoinFloatingSwarm();
   var screen = document.getElementById("screen");
   var width = screen.offsetWidth;
   var height = screen.offsetHeight;
