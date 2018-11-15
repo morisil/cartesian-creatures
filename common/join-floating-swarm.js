@@ -10,5 +10,3 @@ function maybeJoinFloatingSwarm() {
     document.body.appendChild(script);
   }
 }
-
-maybeJoinFloatingSwarm();

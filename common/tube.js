@@ -1,12 +1,12 @@
-window.onload = function() {
-  var screen = document.getElementById("screen");
-  var width = screen.offsetWidth;
-  var height = screen.offsetHeight;
-  screen.width = width;
-  screen.height = height;
-  var screenContext = screen.getContext("2d");
+function startCathodeRay() {
+  var tube = document.getElementById("tube");
+  var width = tube.offsetWidth;
+  var height = tube.offsetHeight;
+  tube.width = width;
+  tube.height = height;
+  var tubeContext = tube.getContext("2d");
 
-  var imageData = screenContext.createImageData(width, height);
+  var imageData = tubeContext.createImageData(width, height);
 
   var context = {
     imageData: imageData,
@@ -39,16 +39,9 @@ window.onload = function() {
 
   function paint(now) {
     createImage(now);
-    screenContext.putImageData(imageData, 0, 0);
+    tubeContext.putImageData(imageData, 0, 0);
     window.requestAnimationFrame(paint);
   }
 
   window.requestAnimationFrame(paint);
 };
-
-// it's a hack, when onresize was the same as onload it was causing significant slowdown after
-// each window resize, like if some resources were leaking
-window.onresize = function() {
-  location.reload();
-}
-
