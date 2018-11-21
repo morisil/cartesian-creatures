@@ -24,8 +24,8 @@ function startCathodeRay() {
       context = updateContext(context);
     }
 
-    for (var x = 0; x < width; x++) {
-      for (var y = 0; y < height; y++) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
         var pixelIndex = (y * width + x) * 4;
         var color = getColor(x, y, now, context);
         imageData.data[pixelIndex] = color[0];       // Red
