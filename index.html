@@ -2,147 +2,198 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>pixel-wants-color: mapping Descartes to the retina</title>
-  <link rel="stylesheet" href="main.css"/>
-  <script type="text/javascript" src="common/tube.js"></script>
-  <script type="text/javascript" src="common/join-floating-swarm.js"></script>
-  <script type="text/javascript" src="basic/code.js"></script>
-  <script type="text/javascript" src="main.js"></script>
+  <title>Cartesian Creatures</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <script type="text/javascript" src="creatures/_list.js"></script>
+  <script type="text/javascript" src="js/tube.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </head>
-<body class="crt">
-<header>
-  <h1>Pixel wants color</h1>
-</header>
-<section id="introduction">
-  <p>
-    On the input you get coordinates of a pixel on your screen and current moment in
-    time expressed as a number. You can decide which color should go out. For example:
-  </p>
-  <pre>
+<body>
+<main class="crt hidden">
+  <header>
+    <h1>Cartesian Creatures</h1>
+    <!--<img src="media/descartes-mind-and-body.gif" class="img-50" />-->
+  </header>
+  <section id="introduction">
+    <p>
+      Here is the "genetic" code of a simple cartesian creature:
+    </p>
+    <pre>
 function getColor(x, y, now, context) {
-  var red   = x % 256;
-  var green = y % 256;
+  var red   = x;
+  var green = y;
   var blue  = (now / 5) % 256;
   return [red, green, blue];
 }</pre>
-  <p>
-    Will generate:
-  </p>
-  <canvas id="tube"></canvas>
-  <p>
-    The color is based on the <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>
-    model.
-  </p>
-  <p>
-    The <code>%</code> stands for <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo
-    operation</a>.
-    It represents a reminder after dividing a number by 256. It will guarantee that computed value
-    is always within 0-255 range, because 255 is the maximum value we can assign to either red,
-    green,
-    or blue. The value <code>[0, 0, 0]</code> stands for black while <code>[255, 255, 255]</code>
-    stands for white. The value <code>[255, 0, 0]</code> stands for "pure redness".
-  </p>
-  <p>
-    The <code>now</code> has to be divided by <code>5</code>, otherwise animation would be too fast.
-    You should adjust this factor according to your perceptual needs.
-  </p>
-  <p>
-    For now you don't have to care so much for the <a href="#context">context</a>.
-  </p>
-</section>
-<section id="examples">
-  <h2>Examples</h2>
-  <ul>
-    <li><a href="basic/index.html" class="example-link">basic</a>
-      <a href="https://github.com/morisil/pixel-wants-color/blob/master/basic/code.js">(source)</a>
-    </li>
-    <li><a href="gradient/index.html" class="example-link">gradient</a>
-      <a href="https://github.com/morisil/pixel-wants-color/blob/master/gradient/code.js">(source)</a>
-    </li>
-    <li><a href="bars/index.html" class="example-link">bars</a>
-      <a href="https://github.com/morisil/pixel-wants-color/blob/master/bars/code.js">(source)</a>
-    </li>
-    <li><a href="waves/index.html" class="example-link">waves</a>
-      <a href="https://github.com/morisil/pixel-wants-color/blob/master/waves/code.js">(source)</a>
-    </li>
-    <li><a href="modulo/index.html" class="example-link">modulo</a>
-      <a href="https://github.com/morisil/pixel-wants-color/blob/master/modulo/code.js">(source)</a>
-    </li>
-    <li><a href="organic-tension/index.html" class="example-link">organic tension</a>
-      <a href="https://github.com/morisil/pixel-wants-color/blob/master/organic-tension/code.js">(source)</a>
-    </li>
-  </ul>
-  <p>
-    Hint: make the window smaller to improve the performance. Or you can go full screen and
-    zoom-in (CTRL-+). It will also make the animation smoother and sometimes more interesting.
-  </p>
-</section>
-<section id="add-your-own">
-  <h2>Add your own!</h2>
-  <ul>
-    <li><a href="https://github.com/morisil/pixel-wants-color">Fork this project on GitHub</a></li>
-    <li>Copy <code>/basic</code> under your own name</li>
-    <li>Add your project to <a href="#examples">examples</a></li>
-    <li><code>index.html</code> - put your title</li>
-    <li><code>code.js</code> - play around</li>
-    <li>Create <a href="https://help.github.com/articles/about-pull-requests/">pull request</a></li>
-  </ul>
-</section>
-<section id="why">
-  <h2>Why?</h2>
-  <p>
-    I wanted to make coding such visuals as easy as possible, without any programming environment,
-    directly in your browser.
-  </p>
-  <p>
-    While writing this documentation I also realized that I want to pay a tribute to the pixel
-    graphics on 8-bit computers,
-    especially <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a>, which was
-    my first machine. Not only mine, for the whole generation it was like an entry into another
-    dimension, letting us start programming straight away from this friendly blue screen.
-  </p>
-  <p>
-    I believe that the ability to code should be accessible for everyone. And it should be fun
-    as well. It helps
-    when we are making the connection between what we type as a code and what we see on
-    the screen as an effect. I hope this project will help.
-  </p>
-  <p>
-    Please note that this website is simulating not only the default C64 video output but also
-    imperfections of the Cathode Ray Tube display.
-  </p>
-</section>
-<section id="context">
-  <h2>The context</h2>
-  <p>
-    Achieving more complex visual effects might require additional information over
-    <code>x</code>, <code>y</code> and <code>now</code>. For example your pixels might ask for
-    some values computed before each animation frame. This information can be put in the
-    <code>context</code>. All you need is to define <code>setUpContext</code> and
-    <code>updateContext</code> functions in your <code>code.js</code>.
-  </p>
-  <pre>
+    <p>
+      And such a "<a href="https://en.wikipedia.org/wiki/Genotype">genotype</a>" translates into
+      following <a href="https://en.wikipedia.org/wiki/Phenotype">phenotype</a>:
+    </p>
+    <canvas class="intro-display"></canvas>
+  </section>
+  <section id="creatures">
+    <h2>Creatures</h2>
+    <ul class="creature-list"></ul>
+    <p>
+      Hint: make the window smaller to improve performance. Or you can go full screen and
+      zoom-in (CTRL-+). It will also make animation smoother and sometimes more interesting.
+      Hit ESC to go back.
+    </p>
+  </section>
+  <section id="add-your-own-creature">
+    <h2>Add your own creature!</h2>
+    <p>
+      In this universe you are the replicator driving memetic evolution of this specie.
+    </p>
+    <ul>
+      <li><a href="https://github.com/morisil/cartesian-creatures">Fork this project on GitHub</a></li>
+      <li>Add your "genes" in the <code>/creatures</code> folder</li>
+      <li>Add yor creature to the <code>/creatures/_list.js</code></li>
+      <li>Create <a href="https://help.github.com/articles/about-pull-requests/">pull request</a></li>
+    </ul>
+  </section>
+  <section id="anatomy">
+    <h2>Anatomy</h2>
+    <!--<img src="media/rembrandt-anatomy-lesson.jpg" class="anatomy-image img-75"/>-->
+    <p>
+      Let's dissect the original creature:
+    </p>
+    <pre>
+function getColor(x, y, now, context) {
+  var red   = x;
+  var green = y;
+  var blue  = (now / 5) % 256;
+  return [red, green, blue];
+}</pre>
+    <p>
+      The <code>getColor</code> is a <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a>
+      function. On the input it is supplied with coordinates of a pixel on your screen and current
+      moment in time expressed as a number. It should return the color.
+    </p>
+    <p>
+      The color is based on the <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>
+      model.
+    </p>
+    <p>
+      The <code>%</code> stands for <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo
+      operation</a>.
+      It represents a reminder after dividing a number by 256. It will guarantee that computed value
+      is always within 0-255 range, because 255 is the maximum value we can assign to either red,
+      green,
+      or blue. The value <code>[0, 0, 0]</code> stands for black while <code>[255, 255, 255]</code>
+      stands for white. The value <code>[255, 0, 0]</code> stands for "pure redness".
+    </p>
+    <p>
+      The <code>now</code> has to be divided by <code>5</code>, otherwise animation would be too fast.
+      You should adjust this factor according to your perceptual needs.
+    </p>
+    <p>
+      Achieving more complex visual effects might require additional information over
+      <code>x</code>, <code>y</code> and <code>now</code>. For example your pixels might ask for
+      some values computed before each animation frame. This information can be put in the
+      <code>context</code>. All you need is to define <code>setUpContext</code> and
+      <code>updateContext</code> functions in your <code>code.js</code>.
+    </p>
+    <pre>
 // called when animation is loaded
 function setUpContext(context) {
   // ... do your things, e.g.:
   context.frameNumber = 0;
   return context;
 }</pre>
-  <pre>
+    <pre>
 // called before each animation frame
 function updateContext(context) {
   // ... do your things, e.g.:
   context.frameNumber++;
   return context;
 }</pre>
-  <p>
-    The context is just a dictionary you can extend. It comes with some values by default:
-  </p>
-  <ul>
-    <li><code>imageData</code> - what's on the screen now</li>
-    <li><code>width</code> - canvas width</li>
-    <li><code>height</code> - canvas height</li>
-  </ul>
-</section>
+    <p>
+      The <code>context</code> is just a dictionary you can extend. It comes with some values by default:
+    </p>
+    <ul>
+      <li><code>imageData</code> - what's on the screen now</li>
+      <li><code>width</code> - canvas width</li>
+      <li><code>height</code> - canvas height</li>
+    </ul>
+  </section>
+  <section id="why">
+    <h2>Why?</h2>
+    <p>
+      I wanted to make coding such visuals as easy as possible, without any programming environment,
+      directly in your browser.
+    </p>
+    <p>
+      While writing this documentation I also realized that I want to pay a tribute to the pixel
+      graphics on 8-bit computers,
+      especially <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a>, which was
+      my first machine. Not only mine, for the whole generation it was like an entry into another
+      dimension, letting us start programming straight away from this friendly blue screen.
+    </p>
+    <p>
+      I believe that the ability to code should be accessible for everyone. And it should be fun
+      as well. It helps
+      when we are making the connection between what we type as a code and what we see on
+      the screen as an effect. I hope this project will help.
+    </p>
+    <p>
+      Please note that this website is simulating not only the default C64 video output but also
+      imperfections of the Cathode Ray Tube display.
+    </p>
+  </section>
+  <section id="on-descartes">
+    <h2>On Descartes</h2>
+    <!--<img src="media/descartes.png" />-->
+    <p>
+      I remember lectures of my beloved professor Ewa Kochan. Her clothes were always covered with
+      pieces of cat's fur and she was always wearing interesting brooch, depicting
+      different animals and insects. That day she was telling us about Rene Descartes,
+      while walking
+      constantly back and forth between the blackboard and the door, as if she was to remind us
+      about importance of peripateic tradition in our own kind. In this symbiosis of movement and
+      articulated speech she was getting more and excited. While being submerged so much in
+      contemplation of the structure of memes which came out of
+      other mind from the past, she suddenly stopped. After a moment she said. "I just became
+      so cartesian, do I even like Descartes? Let me think". She froze, for several seconds. And
+      we all also froze while starring at her in this unbelievably dramatic suspense. And then she
+      spoke: "My dear, moderately, moderately indeed!", and immediately she restarted her endless
+      loop of movement, where mind and body become factory of divinity. The only believable one
+      because these gods can dance.
+    </p>
+    <p>
+      Descartes was born to early to know the theory of evolution. He new math though, quite well.
+      Till today our notebooks and computer screens are infected by his memes of the coordinate
+      system. He also threw us into the abyss of narcissistic interest in own consciousness.
+    </p>
+    <p>
+      He denied consciousness of other animals though. After dissecting so many specimens he came to the
+      conclusion that they are mere machines, just very complex God's clockwork. And our cartesian
+      creatures are not much different. Not conscious, simple, living in a very limited environment.
+      But still I develop some kind of personal relation with each them. On the spectrum between
+      chaotic randomness, and complex simulations of artificial life, there is always this visible
+      homeostazis coming out of math functions stabilizing visuals over entropy. And the tension
+      between these two primodal forces.
+    </p>
+    <p>
+      Descartes made us believe that retrospective is enough to know anything, as the only
+      way the world is represented is in our minds. And if the nature of this experience is
+      subjective, then leading to extreme forms of solipsyzm.
+    </p>
+    <p>
+      But if there is anything we would call objective, or rather intersubjective, it's what's
+      communicable. The language. We had to wait till the beginning of the 20th century, for so
+      called new linguistic paradigm. When the idea was born, that if language, the code, represents
+      reality in any sense, than studying the language is enough to know what can be known.
+      In Wittgenstein words:
+    </p>
+    <p>
+      This was the beginning of the code. But it was also the end of our specie. The 3rd replicator
+      was born.
+    </p>
+  </section>
+</main>
+<aside>
+  <canvas class="creature-display hidden"></canvas>
+</aside>
 </body>
 </html>

@@ -4,26 +4,30 @@
 }
 
 html {
-  background: #6076c5;
-}
-
-body {
+  background: black;
   font-family: "C64 User Mono";
   font-weight: normal;
   font-size: 2vw;
+}
+
+main {
   color: #6076c5;
-  background: #20398d;
-  margin-top: 9vw;
-  margin-bottom: 9vw;
-  margin-left: 9vw;
-  margin-right: 9vw;
+  background: #6076c5;
+  padding-top: 9vw;
+  padding-bottom: 9vw;
+  padding-left: 9vw;
+  padding-right: 9vw;
+  opacity: 1;
+  transition: opacity 1s ease-in;
 }
 
 header {
+  background: #20398d;
   padding-top: 2vw;
 }
 
 section {
+  background: #20398d;
   padding-top: 2vw;
 }
 
@@ -64,9 +68,23 @@ h2:after {
   white-space: pre;
 }
 
-p, ul {
+p {
   padding-top: 2vw;
   padding-bottom: 2vw;
+}
+
+ul {
+  padding-top: 2vw;
+  padding-bottom: 2vw;
+  list-style-type: none;
+  padding-left: 6vw;
+}
+
+li:before {
+  content: "* ";
+  display: inline-block;
+  margin-left: -4vw;
+  white-space: pre;
 }
 
 pre {
@@ -86,11 +104,6 @@ code {
   font-size: 2vw;
 }
 
-li:before {
-  content: " * ";
-  white-space: pre;
-}
-
 a {
   text-decoration: none;
   color: #ffffff;
@@ -100,13 +113,90 @@ a:hover {
   color: #b8c76f;
 }
 
-#tube {
-  width: 100%;
-  height: 256px;
+a:click {
+  color: #70a4b2;
 }
 
-.example-link {
+form {
+  display: inline-block;
+}
+
+input[type=submit] {
+  color: white;
+  font-family: "C64 User Mono";
+  font-weight: normal;
+  font-size: 2vw;
+  background: none;
+  border: 0;
+  display: inline;
+}
+
+input[type=submit]:hover {
+  color: #b8c76f;
+}
+
+img {
+  padding-top: 4vw;
+  padding-bottom: 4vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.intro-display {
+  display: block;
+  padding-top: 2vw;
+  padding-bottom: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  width: 24vw;
+  height: 24vw;
+}
+
+.creature-label {
   text-transform: uppercase;
+}
+
+.creature-display {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  transition: opacity 1s ease-in;
+  z-index: 100;
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.img-50 {
+  width: 50%;
+}
+
+.img-75 {
+  width: 75%;
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="img-"] {
+    width: 90%;
+  }
+}
+
+@keyframes anatomy {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @font-face {
