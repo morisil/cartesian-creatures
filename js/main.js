@@ -99,7 +99,7 @@ function createCreatureMutator(name) {
   var data = document.createElement('input');
   data.type = 'hidden';
   data.name = 'data';
-  loadCreature(
+  loadCreatureSource(
     name,
     function(source) {
       data.value = toCodePenPayload(
