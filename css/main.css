@@ -137,7 +137,7 @@ input[type=submit]:hover {
 
 img {
   padding-top: 4vw;
-  padding-bottom: 4vw;
+  padding-bottom: 2vw;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -184,6 +184,39 @@ img {
 @media only screen and (max-width: 768px) {
   [class*="img-"] {
     width: 90%;
+  }
+}
+
+.pixel-descartes {
+  width: 10%;
+  animation: descartes-trajectory 20s linear infinite;
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+@keyframes descartes-trajectory {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  20% {
+    transform: translateX(30vw) scaleX(1);
+  }
+  25% {
+    transform: translateX(30vw) scaleX(-1);
+  }
+  70% {
+    transform: translateX(-30vw) scaleX(-1);
+  }
+  75% {
+    transform: translateX(-30vw) scaleX(1);
+  }
+  100% {
+    transform: translateX(0) scaleX(1);
   }
 }
 
