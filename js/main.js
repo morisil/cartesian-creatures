@@ -94,7 +94,6 @@ function createCreatureMutator(name) {
   var form = document.createElement('form');
   form.action = 'https://codepen.io/pen/define';
   form.method = 'POST';
-  form.target = '_blank';
   form.id = name;
   var data = document.createElement('input');
   data.type = 'hidden';
